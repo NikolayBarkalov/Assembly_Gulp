@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/NikolayBarkalov/Assembly_Gulp/issues"
   },
-  "homepage": "https://github.com/NikolayBarkalov/Assembly_Gulp#readme"
+  "homepage": "https://github.com/NikolayBarkalov/Assembly_Gulp#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
 }
