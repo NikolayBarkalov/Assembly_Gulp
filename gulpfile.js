@@ -1,8 +1,11 @@
-// Обработка HTML
-const html = (cb) => {
-  console.log("Обработка HTML");
+const {src, dest} = require("gulp");
 
-  cb();
+
+
+// Обработка HTML
+const html = () => {
+  return src("./src/html/*.html")
+  .pipe(dest("./public"))
 };
 
 // Задачи
