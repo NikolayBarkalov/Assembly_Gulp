@@ -1,54 +1,33 @@
-const { src, dest, watch, series, parallel } = require("gulp");
+const { watch, series, parallel } = require("gulp");
 const browserSync = require("browser-sync").create();
 
-// Плагины
-const plumber = require("gulp-plumber");
-const notify = require("gulp-notify");
-const fileInclude = require("gulp-file-include");
-const htmlmin = require("gulp-htmlmin");
-const size = require("gulp-size");
 
 
-// Обработка HTML
-const html = () => {
-  return src("./src/html/*.html")
-    .pipe(plumber({
-      errorHandler: notify.onError(error =>({
-        title: "Ошибка в HTML",
-        message: error.message
-      }))
-    }))
-    .pipe(fileInclude())
-    .pipe(size({ title: "До сжатия" }))
-    .pipe(
-      htmlmin({
-        collapseWhitespace: true, //убрать символы пробела минимилизация html
-      })
-    )
-    .pipe(size({ title: "После сжатия" }))
-    .pipe(dest("./public"))
-    .pipe(browserSync.stream());
-};
+//Конфигурация 
+const path = require("./config/path.js");
+
+//Задачи
+const clear = require("./task/clear.js");
+const pug = require("./task/pug.js");
 
 //Сервер
 const server = () => {
   browserSync.init({
     server: {
-      baseDir: "./public",
+      baseDir: path.root
     },
   });
 };
 
 //Наблюдение
 const watcher = () => {
-  watch("./src/html/**/*.html", html);
+  watch(path.pug.watch, pug).on("all", browserSync.reload);
 };
+
 // Задачи
-exports.html = html;
+exports.pug = pug;
 exports.watch = watcher;
+exports.clear = clear;
 
 //Сборка
-exports.dev = series(
-  html, 
-  parallel(watcher, server)
-  );
+exports.dev = series(clear, pug, parallel(watcher, server));
