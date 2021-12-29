@@ -1,0 +1,25 @@
+:root {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: 12px;
+  font-family: Arial;
+  line-height: 1.5;
+}
+
+@media (max-width: 750px) {
+  body {
+    color: #fff;
+    background-color: black;
+  }
+}
+
+@import "block/title.css";
+@import "block/news.css";
