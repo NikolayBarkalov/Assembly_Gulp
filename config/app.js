@@ -11,6 +11,7 @@ module.exports = {
   },
 
   webpack: {
-    mode: "development"
+    mode: "production" // "production" минифицирует js,
+    // mode: "developmen" // "developmen" оставляет js как есть
   },
 };
