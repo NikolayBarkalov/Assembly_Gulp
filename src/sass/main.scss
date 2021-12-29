@@ -1,0 +1,36 @@
+$bace-font-size: 12px;
+
+@mixin ph {
+  @media (max-width: 750px) {
+    @content;
+  }
+}
+
+:root {
+  box-sizing: border-box;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+body {
+  font-size: $bace-font-size;
+  font-family: Arial;
+  line-height: 1.5;
+
+  @include ph {
+      color: #fff;
+      background-color: black;
+  }
+}
+
+//Подключение scss
+// @import "block/title.scss";
+// @import "block/news.scss";
+
+//Подключение scss по маске
+@import "block/*.css";
+
