@@ -1,25 +1,30 @@
+const isProd = process.argv.includes("--production");
+const isDev = !isProd;
+
 module.exports = {
+  isProd: isProd,
+  isDev: isDev,
+
   htmlmin: {
-    collapseWhitespace: true, //убрать символы пробела минимилизация html
+    collapseWhitespace: isProd, //убрать символы пробела минимилизация html
   },
 
   pug: {
-    pretty: true, //СЖАТИЕ
+    pretty: isDev, //СЖАТИЕ
     data: {
       news: require("../data/new.json"),
     },
   },
 
   webpack: {
-    mode: "production" // "production" минифицирует js,
-    // mode: "developmen" // "developmen" оставляет js как есть
+    mode: isProd ? "production" : "development" 
   },
 
   imagemin: {
-    verbose: true //verbose: true & false показать размер сжатия
+    verbose: true, //verbose: true & false показать размер сжатия
   },
 
   fonter: {
-    formats: ["ttf", "woff", "eot", "svg"]
-  }
+    formats: ["ttf", "woff", "eot", "svg"],
+  },
 };
