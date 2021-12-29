@@ -17,5 +17,9 @@ module.exports = {
 
   imagemin: {
     verbose: true //verbose: true & false показать размер сжатия
+  },
+
+  fonter: {
+    formats: ["ttf", "woff", "eot", "svg"]
   }
 };
