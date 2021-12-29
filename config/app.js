@@ -9,4 +9,8 @@ module.exports = {
       news: require("../data/new.json"),
     },
   },
+
+  webpack: {
+    mode: "development"
+  },
 };
