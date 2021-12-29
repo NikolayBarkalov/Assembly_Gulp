@@ -20,6 +20,7 @@ body {
   font-size: $bace-font-size;
   font-family: Arial;
   line-height: 1.5;
+  background: url("../img/bg.png") no-repeat / cover;
 
   @include ph {
       color: #fff;
