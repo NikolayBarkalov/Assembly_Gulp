@@ -1,9 +1,13 @@
-const { watch, series, parallel } = require("gulp");
-const browserSync = require("browser-sync").create();
+global.$ = {
+  // Пакеты
+  gulp: require("gulp"),
+  gp: require("gulp-load-plugins")(),
+  browserSync: require("browser-sync").create(),
 
-//Конфигурация
-const path = require("./config/path.js");
-const app = require("./config/app.js");
+  //Конфигурация
+  path: require("./config/path.js"),
+  app: require("./config/app.js")
+}
 
 //Задачи
 const clear = require("./task/clear.js");
@@ -18,28 +22,28 @@ const font = require("./task/font.js");
 const server = () => {
   browserSync.init({
     server: {
-      baseDir: path.root,
+      baseDir: $.path.root,
     },
   });
 };
 
 //Наблюдение
 const watcher = () => {
-  watch(path.pug.watch, pug).on("all", browserSync.reload);
-  watch(path.scss.watch, scss).on("all", browserSync.reload);
-  watch(path.js.watch, js).on("all", browserSync.reload);
-  watch(path.img.watch, img).on("all", browserSync.reload);
-  watch(path.font.watch, font).on("all", browserSync.reload);
+  watch($.path.pug.watch, pug).on("all", $.browserSync.reload);
+  watch($.path.scss.watch, scss).on("all", $.browserSync.reload);
+  watch($.path.js.watch, js).on("all", $.browserSync.reload);
+  watch($.path.img.watch, img).on("all", $.browserSync.reload);
+  watch($.path.font.watch, font).on("all", $.browserSync.reload);
 };
 
 
-const build = series(
+const build = $.gulp.series(
   clear, 
-  parallel(pug, scss, js, img, font));
+  $.gulp.parallel(pug, scss, js, img, font));
 
-const dev = series(
+const dev = $.gulp.series(
   build, 
-  parallel(watcher, server));
+  $.gulp.parallel(watcher, server));
 
 // Задачи
 exports.pug = pug;
@@ -49,6 +53,6 @@ exports.img = img;
 exports.font = font;
 
 //Сборка
-exports.default = app.isProd
+exports.default = $.app.isProd
   ? build
   :dev;
