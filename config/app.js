@@ -14,4 +14,8 @@ module.exports = {
     mode: "production" // "production" минифицирует js,
     // mode: "developmen" // "developmen" оставляет js как есть
   },
+
+  imagemin: {
+    verbose: true //verbose: true & false показать размер сжатия
+  }
 };
